@@ -122,6 +122,10 @@ btn-search:hover {
     justify-content: center;
 }
 
+.orders-link:hover {
+    text-decoration: underline;
+}
+
 .returns-text {
     display: block;
     font-size: 13px;
@@ -139,6 +143,10 @@ btn-search:hover {
     align-items: center;
     position: relative;
     text-decoration: none;
+}
+
+.cart-link:hover {
+    text-decoration: underline;
 }
 
 .cart-icon {

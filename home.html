@@ -1,25 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Amazon</title>
+
     <link rel="stylesheet" href="./Style/Shared/header-bar.css">
+    <link rel="stylesheet" href="./Style/Shared/general.css">
+    <link rel="stylesheet" href="./Style/pages/amazon.css">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto..." rel="stylesheet">
 
 </head>
+
 <body>
     <!-- navigation bar -->
-     <div class="amazon-header">
+    <div class="amazon-header">
         <!-- left logo and link -->
-         <div class="header-left">
+        <div class="header-left">
             <a href="home.html" class="header-link">
                 <img src="./Images/amazon-logo-white.png" alt="Amazon Logo" class="amazon-logo">
                 <img src="./Images/amazon-mobile-logo-white.png" alt="Amazon Logo" class="amazon-mobile-logo">
             </a>
-         </div>
+        </div>
         <!-- seacrch bar -->
         <div class="header-mid">
             <input type="search" name="searchBar" id="searchBar" placeholder="Search">
@@ -40,7 +46,168 @@
                 <div class="cart-text">Cart</div>
             </a>
         </div>
-     </div>
+    </div>
+
+    <!-- main content -->
+    <div class="main">
+        <!-- product grid -->
+        <div class="products-grid">
+            <!-- product card for repeat items cards -->
+            <div class="product-container">
+                <!-- product image -->
+                <div class="image-container">
+                    <img src="./Images/products/backpack.jpg" alt="" class="product-image">
+                </div>
+
+                <div class="product-name limit-2lines">
+                    Black BackPack
+                </div>
+
+                <!-- product rating container -->
+                <div class="rating-container">
+                    <img class="rating-stars" src="./Images/ratings/rating-35.png">
+                    <div class="rating-count link-primary">
+                        127
+                    </div>
+                </div>
+
+                <!-- price -->
+                <div class="product-price">
+                    $10.90
+                </div>
+
+                <!-- quantity -->
+                <div class="product-quantity-container">
+                    <select>
+                        <option selected value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+
+                <div class="product-spacer"></div>
+
+                <div class="add-to-cart">
+                    <img src="./Images/icons/checkmark.png" alt="Add to cart">
+                    Added
+                </div>
+
+                <button class="button-primary add-to-cart-button">
+                    Add to Cart
+                </button>
+            </div>
+
+            <div class="product-container">
+                <!-- product image -->
+                <div class="image-container">
+                    <img src="./Images/products/backpack.jpg" alt="" class="product-image">
+                </div>
+
+                <div class="product-name limit-2lines">
+                    Black BackPack
+                </div>
+
+                <!-- product rating container -->
+                <div class="rating-container">
+                    <img class="rating-stars" src="./Images/ratings/rating-35.png">
+                    <div class="rating-count link-primary">
+                        127
+                    </div>
+                </div>
+
+                <!-- price -->
+                <div class="product-price">
+                    $10.90
+                </div>
+
+                <!-- quantity -->
+                <div class="quantity-container">
+                    <select>
+                        <option selected value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+
+                <div class="product-spacer"></div>
+
+                <div class="add-to-cart">
+                    <img src="./Images/icons/checkmark.png" alt="Add to cart">
+                    Added
+                </div>
+
+                <button class="button-primary add-to-cart-button">
+                    Add to Cart
+                </button>
+            </div>
+
+            <div class="product-container">
+                <!-- product image -->
+                <div class="image-container">
+                    <img src="./Images/products/backpack.jpg" alt="" class="product-image">
+                </div>
+
+                <div class="product-name limit-2lines">
+                    Black BackPack
+                </div>
+
+                <!-- product rating container -->
+                <div class="rating-container">
+                    <img class="rating-stars" src="./Images/ratings/rating-35.png">
+                    <div class="rating-count link-primary">
+                        127
+                    </div>
+                </div>
+
+                <!-- price -->
+                <div class="product-price">
+                    $10.90
+                </div>
+
+                <!-- quantity -->
+                <div class="product-quantity-container">
+                    <select>
+                        <option selected value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+
+                <div class="product-spacer"></div>
+
+                <div class="add-to-cart">
+                    <img src="./Images/icons/checkmark.png" alt="Add to cart">
+                    Added
+                </div>
+
+                <button class="button-primary add-to-cart-button">
+                    Add to Cart
+                </button>
+            </div>
+        </div>
+    </div>
     <script src="app.js"></script>
 </body>
+
 </html>
