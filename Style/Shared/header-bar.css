@@ -90,6 +90,15 @@
     flex-shrink: 0;
 }
 
+btn-search:hover {
+    background-color: rgb(243, 168, 71);
+    cursor: pointer;
+}
+
+.btn-search:active {
+    background-color: rgb(230, 150, 50);
+}
+
 .search-icon {
     height: 22px;
     margin-left: 2px;
