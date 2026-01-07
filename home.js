@@ -85,3 +85,11 @@ function renderProducts(products) {
 
     productsGrid.innerHTML = productsHTML;
 }
+
+
+// add to card;
+// btn function;
+// get order Date;
+// get item count;
+// add with product id and count to list;
+// show with id and quantiy * price;
