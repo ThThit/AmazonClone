@@ -1,18 +1,33 @@
 const productsGrid = document.querySelector('.products-grid');
+const searchInput = document.getElementById('searchBar');   
 
-let productsHTML = '';
+let allProducts = [];
 
 fetch('./backend/products.json')
   .then(response => response.json())
-  .then(products => {
-      console.log(products); //product array
-      renderProducts(products);
+    .then(products => {
+        allProducts = products;
+        console.log(products); //product array
+        renderProducts(allProducts);
 })
   .catch(error => {
     console.error('Error loading products:', error);
+  });
+
+searchInput.addEventListener('input', () => {
+    const keyWord = searchInput.value.toLowerCase().trim();
+
+    const filteredProducts = allProducts.filter(product => {
+        return (
+            product.name.toLowerCase().includes(keyWord) || product.keywords?.some(k => k.toLowerCase().includes(keyWord))
+        )
+    })
+
+    renderProducts(filteredProducts);
 });
 
 function renderProducts(products) {
+    let productsHTML = '';
     products.forEach(product => {
         productsHTML += `
         <div class="product-container">
