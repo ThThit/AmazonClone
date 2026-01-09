@@ -1,3 +1,5 @@
+import { addToCart } from './data/cart.js';
+
 const productsGrid = document.querySelector('.products-grid');
 const searchInput = document.getElementById('searchBar');   
 
@@ -7,7 +9,7 @@ fetch('./backend/products.json')
   .then(response => response.json())
     .then(products => {
         allProducts = products;
-        console.log(products); //product array
+        // console.log(products); product array
         renderProducts(allProducts);
 })
   .catch(error => {
@@ -76,7 +78,7 @@ function renderProducts(products) {
                     Added
                 </div>
 
-                <button class="button-primary add-to-cart-button">
+                <button class="button-primary btn-add-cart" data-product-id=${product.id}>
                     Add to Cart
                 </button>
             </div>
@@ -92,4 +94,24 @@ function renderProducts(products) {
 // get order Date;
 // get item count;
 // add with product id and count to list;
+// get cart item as an erray
 // show with id and quantiy * price;
+
+
+// check all element in grid, with target class
+productsGrid.addEventListener('click', (e) => {
+    const btn = e.target.closest('.btn-add-cart');
+    if (!btn) return;
+
+    const productId = btn.dataset.productId;
+    // product name from id
+    // const product = allProducts.find(p => p.id == productId);
+    // console.log('Added product:', product.name);
+
+    const productCon = btn.closest('.product-container');
+    const quantity = Number(
+        productCon.querySelector('select').value
+    )
+    addToCart(productId, quantity);
+});
+
