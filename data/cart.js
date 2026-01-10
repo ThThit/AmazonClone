@@ -1,17 +1,33 @@
-let cart = []; 
+let cart = [];
+let products = [];
 
-export function addToCart(productId, name, quantity) {
-    // find item in cart
+const orderDetails = document.querySelector('.order-details-container');
+const totalPriceEl = document.querySelector('.order-total-price');
+
+// Load cart from localStorage
+loadCart();
+
+// Load products FIRST, then render cart
+fetch('./backend/products.json')
+  .then(res => res.json())
+  .then(data => {
+    products = data;
+    renderCart();
+  });
+
+// ---------- CART LOGIC ----------
+
+export function addToCart(productId, quantity) {
     const existItem = cart.find(item => item.productId === productId);
-    // if alreay cart increase quantity
+
     if (existItem) {
         existItem.quantity += quantity;
     } else {
         cart.push({ productId, quantity });
     }
 
-    console.log(cart);
     saveCart();
+    renderCart();
 }
 
 export function getCart() {
@@ -23,12 +39,59 @@ function saveCart() {
 }
 
 function loadCart() {
-    const saveCart = JSON.parse(localStorage.getItem('cart'));
-    if (saveCart) cart = saveCart;
+    const savedCart = JSON.parse(localStorage.getItem('cart'));
+    if (savedCart) cart = savedCart;
 }
 
-loadCart();
+function getProductById(productId) {
+    return products.find(product => product.id === productId);
+}
 
+// Render cart
 function renderCart() {
-    
+    if (!orderDetails || !totalPriceEl) return;
+    if (products.length === 0) return;
+
+    let totalCents = 0;
+    let orderItemsHTML = '';
+
+
+    cart.forEach(item => {
+        const product = getProductById(item.productId);
+        if (!product) return;
+
+        const itemTotalCents = product.priceCents * item.quantity;
+        totalCents += itemTotalCents;
+
+        orderItemsHTML += `
+        <div class="order-details-grid">
+            <div class="product-image-container">
+                <img src="${product.image}" alt="${product.name}">
+            </div>
+
+            <div class="product-details">
+                <div class="product-name">
+                    ${product.name}
+                </div>
+
+                <div class="product-price">
+                    $${(product.priceCents / 100).toFixed(2)} x ${item.quantity} = $${((product.priceCents / 100) * item.quantity).toFixed(2) }
+                </div>
+
+                <div class="product-quantity">
+                    Quantity: ${item.quantity}
+                </div>
+            </div>
+
+            <div class="product-actions">
+                <button class="track-package-button button-secondary">
+                    Track package
+                </button>
+            </div>
+        </div>
+        `;
+    });
+
+    orderDetails.innerHTML = orderItemsHTML;
+    totalPriceEl.textContent = `$${(totalCents / 100).toFixed(2)}`
 }
