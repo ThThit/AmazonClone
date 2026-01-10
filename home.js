@@ -105,8 +105,7 @@ productsGrid.addEventListener('click', (e) => {
 
     const productId = btn.dataset.productId;
     // product name from id
-    // const product = allProducts.find(p => p.id == productId);
-    // console.log('Added product:', product.name);
+    // const name = allProducts.find(p => p.id == productId);
 
     const productCon = btn.closest('.product-container');
     const quantity = Number(

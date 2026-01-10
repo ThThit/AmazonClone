@@ -1,8 +1,9 @@
 let cart = []; 
 
-export function addToCart(productId, quantity) {
+export function addToCart(productId, name, quantity) {
+    // find item in cart
     const existItem = cart.find(item => item.productId === productId);
-
+    // if alreay cart increase quantity
     if (existItem) {
         existItem.quantity += quantity;
     } else {
@@ -27,3 +28,7 @@ function loadCart() {
 }
 
 loadCart();
+
+function renderCart() {
+    
+}
