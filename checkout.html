@@ -1,11 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Check Out</title>
+
+    <link rel="stylesheet" href="./Style/pages/orders.css">
+    <link rel="stylesheet" href="./Style/Shared/header-bar.css">
+    <link rel="stylesheet" href="./Style/Shared/general.css">
+    <link rel="stylesheet" href="./Style/pages/amazon.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
 </head>
+
 <body>
-    
+    <!-- navigation bar -->
+    <div class="amazon-header">
+        <!-- left logo and link -->
+        <div class="header-left">
+            <a href="home.html" class="header-link">
+                <img src="./Images/amazon-logo-white.png" alt="Amazon Logo" class="amazon-logo">
+                <img src="./Images/amazon-mobile-logo-white.png" alt="Amazon Logo" class="amazon-mobile-logo">
+            </a>
+        </div>
+        <!-- seacrch bar -->
+        <div class="header-mid">
+            <input type="search" name="searchBar" id="searchBar" placeholder="Search">
+            <button class="btn-search">
+                <img src="./Images/icons/search-icon.png" alt="Search Icon" class="search-icon">
+            </button>
+        </div>
+        <!-- orders and cart -->
+        <div class="header-right">
+            <!-- return and orders -->
+            <a class="orders-link header-link" href="orders.html">
+                <span class="returns-text">Returns</span>
+                <span class="orders-text">& Orders</span>
+            </a>
+            <!-- shopping cart -->
+            <a class="cart-link header-link" href="checkout.html">
+                <img class="cart-icon" src="images/icons/cart-icon.png">
+                <div class="cart-quantity">3</div>
+                <div class="cart-text">Cart</div>
+            </a>
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="page-title">Your Cart</div>
+
+        <div class="orders-grid">
+            <div class="order-container">
+                <div class="order-header">
+                    <!-- head left -->
+                    <div class="order-head-left">
+                        <!-- order date -->
+                        <div class="order-date">
+                            <div class="order-head-label">Cart Added</div>
+                            <div>Aug 12</div>
+                        </div>
+                        <!-- total price -->
+                        <div class="order-toal">
+                            <div class="order-head-label">Total: </div>
+                            <div class="order-total-price">$0.00</div>
+                        </div>
+                    </div>
+                    <!-- order right  -->
+                    <div class="order-head-right">
+                        <button class="track-package-button button-primary">
+                            Place Order
+                        </button>
+                    </div>
+                </div>
+
+                <!-- order deails -->
+                <!-- order deails grid -->
+                <div class="order-details-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="./data/cart.js"></script>
 </body>
+
 </html>

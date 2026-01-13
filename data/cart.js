@@ -85,7 +85,7 @@ function renderCart() {
 
             <div class="product-actions">
                 <button class="track-package-button button-secondary">
-                    Track package
+                    Remove Item
                 </button>
             </div>
         </div>
