@@ -15,7 +15,6 @@ fetch('./backend/products.json')
     renderCart();
   });
 
-// ---------- CART LOGIC ----------
 
 export function addToCart(productId, quantity) {
     const existItem = cart.find(item => item.productId === productId);
@@ -28,10 +27,19 @@ export function addToCart(productId, quantity) {
 
     saveCart();
     renderCart();
+    return getCartQuantity();
 }
 
 export function getCart() {
     return cart;
+}
+
+export function getCartQuantity() {
+    let total = 0; 
+    cart.forEach(item => {
+        total += item.quantity;
+    });
+    return total;
 }
 
 function saveCart() {

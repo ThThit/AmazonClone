@@ -1,7 +1,13 @@
 import { addToCart } from './data/cart.js';
 
+// load cart quantity
+import { getCartQuantity } from './data/cart.js';
+
 const productsGrid = document.querySelector('.products-grid');
 const searchInput = document.getElementById('searchBar');   
+const cartQuantity = document.querySelector('.cart-quantity');
+
+cartQuantity.innerHTML = getCartQuantity();
 
 let allProducts = [];
 
@@ -108,9 +114,10 @@ productsGrid.addEventListener('click', (e) => {
     // const name = allProducts.find(p => p.id == productId);
 
     const productCon = btn.closest('.product-container');
-    const quantity = Number(
+    const selectQuantity = Number(
         productCon.querySelector('select').value
     )
-    addToCart(productId, quantity);
+    
+    addToCart(productId, selectQuantity);
 });
 
