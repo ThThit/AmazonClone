@@ -119,5 +119,6 @@ productsGrid.addEventListener('click', (e) => {
     )
     
     addToCart(productId, selectQuantity);
+    cartQuantity.innerHTML = getCartQuantity();
 });
 

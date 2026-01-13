@@ -2,10 +2,13 @@ let cart = [];
 let products = [];
 
 const orderDetails = document.querySelector('.order-details-container');
-const totalPriceEl = document.querySelector('.order-total-price');
+const totalPriceEl = document.querySelector('.order-total-price'); 
+const cartQuantity = document.querySelector('.cart-quantity');
 
 // Load cart from localStorage
 loadCart();
+
+cartQuantity.innerHTML = getCartQuantity();
 
 // Load products FIRST, then render cart
 fetch('./backend/products.json')
@@ -92,7 +95,7 @@ function renderCart() {
             </div>
 
             <div class="product-actions">
-                <button class="track-package-button button-secondary">
+                <button class="btn-remove-item  button-secondary" data-product-id=${product.id}>
                     Remove Item
                 </button>
             </div>
@@ -103,3 +106,12 @@ function renderCart() {
     orderDetails.innerHTML = orderItemsHTML;
     totalPriceEl.textContent = `$${(totalCents / 100).toFixed(2)}`
 }
+
+// remove item form the cart
+// find item from cart with id
+// remove it and update total cart quantity
+const btnItemRemove = document.querySelector('.btn-remove-item');
+
+btnItemRemove.addEventListener(
+    cli
+)

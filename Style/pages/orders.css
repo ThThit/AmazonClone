@@ -159,6 +159,16 @@ body {
     padding: 8px;
 }
 
+.btn-remove-item {
+    width: 100%;
+    font-size: 15px;
+    background: rgb(232, 115, 73);
+    padding: 10px;
+    border: 1px solid rgb(232, 115, 73);
+    color: whitesmoke;
+    border-radius: 8px;
+}
+
 @media (max-width: 800px) {
     .buy-again-button {
         margin-bottom: 10px;
@@ -175,6 +185,10 @@ body {
     }
 
     .track-package-button {
+        width: 140px;
+    }
+
+    .btn-remove-item {
         width: 140px;
     }
 }
