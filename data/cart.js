@@ -4,6 +4,7 @@ let products = [];
 const orderDetails = document.querySelector('.order-details-container');
 const totalPriceEl = document.querySelector('.order-total-price'); 
 const cartQuantity = document.querySelector('.cart-quantity');
+const orderDetailsContainer = document.querySelector('.order-details-container');
 
 // Load cart from localStorage
 loadCart();
@@ -110,8 +111,22 @@ function renderCart() {
 // remove item form the cart
 // find item from cart with id
 // remove it and update total cart quantity
-const btnItemRemove = document.querySelector('.btn-remove-item');
+if (orderDetailsContainer) {
+  orderDetailsContainer.addEventListener('click', (e) => {
+    const btn = e.target.closest('.btn-remove-item');
+    if (!btn) return;
 
-btnItemRemove.addEventListener(
-    cli
-)
+    const productId = btn.dataset.productId;
+    removeFromCart(productId);
+
+    cartQuantity.innerHTML = getCartQuantity();
+  });
+}
+
+
+
+function removeFromCart(productId) {
+    cart = cart.filter(item => item.productId !== productId);
+    saveCart();
+    renderCart();
+}
