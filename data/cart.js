@@ -123,8 +123,6 @@ if (orderDetailsContainer) {
   });
 }
 
-
-
 function removeFromCart(productId) {
     cart = cart.filter(item => item.productId !== productId);
     saveCart();
