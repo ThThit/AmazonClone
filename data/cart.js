@@ -1,10 +1,13 @@
 let cart = [];
 let products = [];
+let cartDate = '';
 
 const orderDetails = document.querySelector('.order-details-container');
 const totalPriceEl = document.querySelector('.order-total-price'); 
 const cartQuantity = document.querySelector('.cart-quantity');
 const orderDetailsContainer = document.querySelector('.order-details-container');
+// Select the specific sub-element for the date value
+const orderDateElement = document.querySelector('.cart-date-value');
 
 // Load cart from localStorage
 loadCart();
@@ -21,6 +24,9 @@ fetch('./backend/products.json')
 
 
 export function addToCart(productId, quantity) {
+    // save cart updated date
+    updateCartDate();
+
     const existItem = cart.find(item => item.productId === productId);
 
     if (existItem) {
@@ -48,11 +54,20 @@ export function getCartQuantity() {
 
 function saveCart() {
     localStorage.setItem('cart', JSON.stringify(cart));
+    localStorage.setItem('cartDate', cartDate); // save date as string
 }
 
 function loadCart() {
     const savedCart = JSON.parse(localStorage.getItem('cart'));
+    const savedDate = localStorage.getItem('cartDate');
     if (savedCart) cart = savedCart;
+    if (savedDate) cartDate = savedDate;
+}
+
+function updateCartDate() {
+    const date = new Date();
+    const options = { day: '2-digit', month: 'short', year: 'numeric' };
+    cartDate = date.toLocaleDateString('en-GB', options);
 }
 
 function getProductById(productId) {
@@ -66,7 +81,6 @@ function renderCart() {
 
     let totalCents = 0;
     let orderItemsHTML = '';
-
 
     cart.forEach(item => {
         const product = getProductById(item.productId);
@@ -105,7 +119,13 @@ function renderCart() {
     });
 
     orderDetails.innerHTML = orderItemsHTML;
-    totalPriceEl.textContent = `$${(totalCents / 100).toFixed(2)}`
+
+    // Only update the inner date text, preserving the "Cart Added" label
+    if (orderDateElement) {
+        orderDateElement.innerHTML = cartDate || ".....";
+    }
+
+    totalPriceEl.textContent = `$${(totalCents / 100).toFixed(2)}`;
 }
 
 // remove item form the cart
@@ -125,6 +145,13 @@ if (orderDetailsContainer) {
 
 function removeFromCart(productId) {
     cart = cart.filter(item => item.productId !== productId);
+
+    if (cart.length > 0) {
+        updateCartDate();
+    } else {
+        cartDate = '.....';
+    }
+
     saveCart();
     renderCart();
 }
