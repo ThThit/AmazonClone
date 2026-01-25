@@ -2,10 +2,10 @@ let cart = [];
 let products = [];
 let cartDate = '';
 
-const orderDetails = document.querySelector('.order-details-container');
+const cartDetails = document.querySelector('.order-details-container');
 const totalPriceEl = document.querySelector('.order-total-price'); 
 const cartQuantity = document.querySelector('.cart-quantity');
-const orderDetailsContainer = document.querySelector('.order-details-container');
+const cartDetailsContainer = document.querySelector('.order-details-container');
 // Select the specific sub-element for the date value
 const orderDateElement = document.querySelector('.cart-date-value');
 
@@ -76,7 +76,7 @@ function getProductById(productId) {
 
 // Render cart
 function renderCart() {
-    if (!orderDetails || !totalPriceEl) return;
+    if (!cartDetails || !totalPriceEl) return;
     if (products.length === 0) return;
 
     let totalCents = 0;
@@ -118,7 +118,7 @@ function renderCart() {
         `;
     });
 
-    orderDetails.innerHTML = orderItemsHTML;
+    cartDetails.innerHTML = orderItemsHTML;
 
     // Only update the inner date text, preserving the "Cart Added" label
     if (orderDateElement) {
@@ -131,8 +131,8 @@ function renderCart() {
 // remove item form the cart
 // find item from cart with id
 // remove it and update total cart quantity
-if (orderDetailsContainer) {
-  orderDetailsContainer.addEventListener('click', (e) => {
+if (cartDetailsContainer) {
+  cartDetailsContainer.addEventListener('click', (e) => {
     const btn = e.target.closest('.btn-remove-item');
     if (!btn) return;
 
@@ -155,3 +155,58 @@ function removeFromCart(productId) {
     saveCart();
     renderCart();
 }
+
+// get the cart item list.
+// generate list id
+// put it in a cart in a order list as object
+// to manipulate and check in orders.js
+
+
+function placeOrder() {
+    if (cart.length === 0) return;
+
+    // load the exisinging order
+    const savedOrders = JSON.parse(localStorage.getItem('orders')) || [];
+    
+    const orderId = `ORD-${Date.now()}`;
+
+    let totalCents = 0;
+
+    // cart order
+    const orderItems = cart.map(item => {
+        const product = getProductById(item.productId);
+
+        const itemTotal = product.priceCents * item.quantity;
+
+        totalCents += itemTotal;
+
+        return {
+            productId: product.id,
+            name: product.name,
+            priceCents: product.priceCents,
+            quantity: item.quantity,
+            image: product.image
+        };
+    });
+
+    const order = {
+        id: orderId,
+        date: cartDate,
+        item: orderItems,
+        totalCents
+    };
+
+    savedOrders.push(order);
+    localStorage.setItem('orders', JSON.stringify(savedOrders));
+
+    console.log(savedOrders);
+
+    // clear cart
+    cart = [];
+    cartDate = '......'
+    saveCart();
+    renderCart();
+    cartQuantity.innerHTML = 0;
+}
+
+document.querySelector('.btn-place-order')?.addEventListener('click', placeOrder);
