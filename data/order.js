@@ -1,7 +1,9 @@
 const ordersGrid = document.querySelector(".orders-grid");
 
-// load cart 
-const cart = JSON.parse(localStorage.getItem('cart')) || [];
+// load cart quantity
+// import { getCartQuantity } from './data/cart.js';
+
+// cartQuantity.innerHTML = getCartQuantity();
 
 
 // load orders
