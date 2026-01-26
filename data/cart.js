@@ -120,7 +120,7 @@ function renderCart() {
 
     cartDetails.innerHTML = orderItemsHTML;
 
-    // Only update the inner date text, preserving the "Cart Added" label
+    // Only update the inner date text
     if (orderDateElement) {
         orderDateElement.innerHTML = cartDate || ".....";
     }
