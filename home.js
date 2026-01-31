@@ -7,6 +7,7 @@ const productsGrid = document.querySelector('.products-grid');
 const searchInput = document.getElementById('searchBar');   
 const cartQuantity = document.querySelector('.cart-quantity');
 
+
 cartQuantity.innerHTML = getCartQuantity();
 
 let allProducts = [];
@@ -109,16 +110,27 @@ productsGrid.addEventListener('click', (e) => {
     const btn = e.target.closest('.btn-add-cart');
     if (!btn) return;
 
-    const productId = btn.dataset.productId;
-    // product name from id
-    // const name = allProducts.find(p => p.id == productId);
-
     const productCon = btn.closest('.product-container');
+    const productId = btn.dataset.productId;
+
     const selectQuantity = Number(
         productCon.querySelector('select').value
-    )
-    
+    );
+
     addToCart(productId, selectQuantity);
     cartQuantity.innerHTML = getCartQuantity();
+
+    // ✅ scoped to THIS product
+    const addIcon = productCon.querySelector('.add-to-cart');
+
+    // restart animation safely
+    addIcon.classList.remove('show');
+    void addIcon.offsetWidth; // force reflow
+    addIcon.classList.add('show');
+
+    setTimeout(() => {
+        addIcon.classList.remove('show');
+    }, 1500);
 });
+
 
