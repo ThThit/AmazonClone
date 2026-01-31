@@ -9,6 +9,9 @@ const ordersGrid = document.querySelector(".orders-grid");
 // load orders
 const orders = JSON.parse(localStorage.getItem('orders')) || [];
 
+// sort orders by last added
+orders.sort((a, b) => new Date(b.date) - new Date(a.date));
+
 // const orders = [];
 console.log(orders);
 renderOrders();
@@ -23,6 +26,7 @@ function renderOrders() {
     let ordersHtml = '';
 
     orders.forEach(order => {
+        const status = getDeliveryStatus(order.date)
         ordersHtml += `
         <div class="order-container">
                 <div class="order-header">
@@ -39,6 +43,11 @@ function renderOrders() {
                             <div class="order-total-price">
                              $${(order.totalCents / 100).toFixed(2)}
                              </div>
+                        </div>
+                        <!-- order status  -->
+                        <div class="order-status">
+                            <div class="order-head-label">Status:</div>
+                            <div class="${status === 'Delivered' ? 'delivered' : 'in-transit'}">${status}</div>
                         </div>
                     </div>
                     <!-- order right  -->
@@ -88,4 +97,13 @@ function renderOrderItems(items) {
         `
     });
     return itemsHtml;
+}
+
+function getDeliveryStatus(orderDate) {
+    const orderTime = new Date(orderDate).getTime();
+    const now = Date.now();
+
+    const diffDate = (now - orderTime) / (1000 * 60 * 60 * 24);
+
+    return diffDate >= 3 ? "Delivered" : "In Transit";
 }

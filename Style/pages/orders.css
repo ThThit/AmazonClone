@@ -51,6 +51,10 @@ body {
     margin-right: 45px;
 }
 
+.order-status {
+    margin-left: 4rem;
+}
+
 .order-head-right {
     flex-shrink: 1;
 }
@@ -229,4 +233,13 @@ body {
         width: 100%;
         padding: 12px;
     }
+}
+.delivered {
+    color: green;
+    font-weight: bold;
+}
+
+.in-transit {
+    color: orange;
+    font-weight: bold;
 }
