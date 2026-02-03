@@ -1,23 +1,20 @@
-const ordersGrid = document.querySelector(".orders-grid");
-
-// load cart quantity
-// import { getCartQuantity } from './data/cart.js';
-
-// cartQuantity.innerHTML = getCartQuantity();
-
-
 // load orders
 const orders = JSON.parse(localStorage.getItem('orders')) || [];
 
 // sort orders by last added
 orders.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-// const orders = [];
-console.log(orders);
-renderOrders();
+const ordersGrid = document.querySelector(".orders-grid");
+
+if (document.querySelector('.orders-grid')) {
+    renderOrders();
+}
+
 
 
 function renderOrders() {
+    if (!ordersGrid) return;
+
     if (orders.length === 0) {
         ordersGrid.innerHTML = `<p>No orders yet.</p>`;
         return;
@@ -56,14 +53,17 @@ function renderOrders() {
                         <div>${order.id}</div>
                     </div>
                 </div>
-            ${renderOrderItems(order.item)}
+                ${renderOrderItems(order.item, order.id)}
         </div>
         `;
     });
     ordersGrid.innerHTML = ordersHtml;
 }
 
-function renderOrderItems(items) {
+
+
+
+function renderOrderItems(items, orderId) {
     let itemsHtml = '';
 
     items.forEach(item => {
@@ -88,10 +88,12 @@ function renderOrderItems(items) {
             </div>
 
             <div class="product-actions">
-                <!-- <a href="tracking.html?orderId=123&productId=456"> -->
+                 <a href="tracking.html?orderId=${orderId}&productId=${item.productId}">
+\
                     <button class="track-package-button button-secondary">
                         Track package
                     </button>
+                </a>
             </div>
         </div>
         `
@@ -107,3 +109,24 @@ function getDeliveryStatus(orderDate) {
 
     return diffDate >= 3 ? "Delivered" : "In Transit";
 }
+
+// tracking
+function initTracking() {
+    const url = new URL(window.location.href);
+    const orderId = url.searchParams.get('orderId');
+    const productId = url.searchParams.get('productId');
+
+    if (!orderId || !productId) return;
+
+    const order = orders.find(o => o.id === orderId);
+    if (!order) return;
+
+    const item = order.item.find(i => i.productId == productId);
+    if (!item) return;
+
+    console.log('Order:', order);
+    console.log('Tracked item:', item);
+}
+
+
+initTracking();
