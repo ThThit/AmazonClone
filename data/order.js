@@ -60,9 +60,6 @@ function renderOrders() {
     ordersGrid.innerHTML = ordersHtml;
 }
 
-
-
-
 function renderOrderItems(items, orderId) {
     let itemsHtml = '';
 
@@ -126,6 +123,37 @@ function initTracking() {
 
     console.log('Order:', order);
     console.log('Tracked item:', item);
+
+    console.log(item.image)
+
+    // porduct info 
+    const productInfos = document.querySelectorAll('.product-info');
+
+    if (productInfos.length >= 2) {
+        productInfos[0].textContent = item.name;
+        productInfos[1].textContent = `Quantity: ${item.quantity}`;
+    }
+
+
+    // img
+    const img = document.querySelector('.product-image');
+
+    if (img) {
+        img.src = item.image;
+        img.alt = item.name;
+    }
+
+    // delivery date
+    const orderDate = new Date(order.date);
+    const deliveryDate = new Date(orderDate);
+    deliveryDate.setDate(orderDate.getDate() + 3);
+
+    const deliveryDateEl = document.querySelector('.delivery-date');
+
+    if (deliveryDateEl) {
+        deliveryDateEl.textContent = `Arriving on ${deliveryDate.toDateString()}`;
+    }
+
 }
 
 
