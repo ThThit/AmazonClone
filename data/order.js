@@ -10,7 +10,7 @@ if (document.querySelector('.orders-grid')) {
     renderOrders();
 }
 
-
+initTracking();
 
 function renderOrders() {
     if (!ordersGrid) return;
@@ -124,8 +124,6 @@ function initTracking() {
     console.log('Order:', order);
     console.log('Tracked item:', item);
 
-    console.log(item.image)
-
     // porduct info 
     const productInfos = document.querySelectorAll('.product-info');
 
@@ -148,6 +146,8 @@ function initTracking() {
     const deliveryDate = new Date(orderDate);
     deliveryDate.setDate(orderDate.getDate() + 3);
 
+    orderTrackingProcess(orderDate);
+
     const deliveryDateEl = document.querySelector('.delivery-date');
 
     if (deliveryDateEl) {
@@ -156,5 +156,25 @@ function initTracking() {
 
 }
 
+function orderTrackingProcess(orderDate) {
+    const labels = document.querySelectorAll(".progress-label");
+    const bar = document.querySelector(".progress-bar");
 
-initTracking();
+    // dom protection
+    if (!labels.length || !bar) return;
+
+    labels.forEach(l => l.classList.remove('current-status'));
+
+    const diffDay = (Date.now() - new Date(orderDate).getTime()) / (1000 * 60 * 60 * 24);
+
+    if (diffDay < 1) {
+        labels[0].classList.add('current-status');
+        bar.style.width = '25%';
+    } else if (diffDay < 3) {
+        labels[1].classList.add('current-status');
+        bar.style.width = '66%';
+    } else {
+        labels[2].classList.add('current-status');
+        bar.style.width = '100%';
+    }
+}
